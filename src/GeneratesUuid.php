@@ -92,9 +92,9 @@ trait GeneratesUuid
         return call_user_func([Uuid::class, $this->resolveUuidVersion()]);
     }
 
-    public function uuidVersion(): string
+    public function uuidVersion(): ?string
     {
-        return 'uuid4';
+        return null;
     }
 
     /**
@@ -102,7 +102,10 @@ trait GeneratesUuid
      */
     public function resolveUuidVersion(): string
     {
-        if (($uuidVersion = $this->uuidVersion()) === 'ordered') {
+
+        $uuidVersion = $this->uuidVersion() ?? config('model-uuid.uuid_version', 'uuid4');
+
+        if ($uuidVersion === 'ordered') {
             $uuidVersion = 'uuid6';
         }
 
