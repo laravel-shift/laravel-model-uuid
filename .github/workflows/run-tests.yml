@@ -78,7 +78,7 @@ jobs:
           composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
-        run: vendor/bin/pest -p
+        run: vendor/bin/pest
         env:
           DB_CONNECTION: mysql
           DB_DATABASE: model_uuid
